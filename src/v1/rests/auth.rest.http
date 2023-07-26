@@ -1,0 +1,38 @@
+@urlDev=http://localhost:3000
+### register
+
+POST {{urlDev}}/v1/api/register
+Content-Type: application/json
+
+{
+    "fullname": "Nguyen Tuan Phong",
+    "email": "ntp892vt@gmail.com",
+    "password": "123456",
+    "phoneNumber": "0345579959"
+}
+
+### login
+
+POST {{urlDev}}/v1/api/login
+Content-Type: application/json
+
+{
+    "loginName": "ntp11892vt@gmail.com",
+    "password": "123456"
+}
+
+### refreshToken
+
+POST {{urlDev}}/v1/api/refreshToken
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZmNGJkMmIwNWM3NWIzZTk4NDM1ZjAiLCJpYXQiOjE2Nzc3MzA2NDIsImV4cCI6MTcwOTI4ODI0Mn0.U74L4gpjjngGhIdjR4ANT9f6X3hwltRiPR8p34tblXGvtElWmutzC80IL5XTD67oe6s-qPjW504mgNecM7XO8-v82PsZBnO5FlUHYRAI6mBmSk5YeVhkB2TLgJoN2IxvvOcSzrl0CncckXfA8w2sxiNWp00f4KpEx18S17X-j62ZoXgJD6fgo1WHpqJxpke08tu3NpFrY-vtZd9AckN1PEQDiz0wMSBvReTBn8faO7m7sfFRielT7e5djH0Xb3txTb9bDUjwnzFEkEjz0h75r2shVy80Fd7rsOb_p1xfzJpbQ0TbMC-wXnjicJrg-VyC6MiCcU-N9jqSaDemw4nHfV1dh-5mHGYH08dWZE-ab83o_HuQIGkduB8i4Q4LBktEdZyT6i7C_AzChL-3Jr98XeYl-1xnQtzvfX1rCCx4qjpjB_MtWSvvt2hskwrnaGK1lXOy3PqXsnzdUd3ZOJCoOXNEDA3I-93L-JEXqElxE5GQbqNuX3wy4sAmRaZvAUXRbtNh2qGOZE3c9OoShJortoedu7PriyC1Rp_2cQBXm4iXcty8lv08qop8iNGAjEuxBWi5ciMOnyMWcVjxhU0n3yo-1WtMCJENUWs656yAx0wV4XZSdySnkzNR_27J0O0R4Wol-CWE-kdL3sZjraNP4ZQ_PQX0JJ266l9QgEoxnqg",
+    "userId": "63ff4bd2b05c75b3e98435f0"
+}
+
+### test
+
+GET {{urlDev}}/v1/api/test?userId=63ff4bd2b05c75b3e98435f0
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZmNGJkMmIwNWM3NWIzZTk4NDM1ZjAiLCJpYXQiOjE2Nzc3MzA2NDEsImV4cCI6MTY3NzczMDcwMX0.PeIfvPWAlCS6uljZ1WAaAatd8XwQHb6xFTxhetHQZW8QZGNK0MWEdbxbx5tQh1lHYWm1zXtpTT0gS5PrblW_KDdyn8M_d3Xx95yobryrv-c4UGzR36wRHvO5quU-AgckqnfhBpJFi5a3v9Hj_1AvfIDyiQewqxvjN-4V8Wq-euj8vzkts2bGGTHD10TKrvYpJeRDy5fpLoBy1AChZenva_6uKmRl8zFjEaczny8hJa3yK5BY2zD7Megd-AZx2PsI0TfvNrSMpK243kYj1DiBOQJQ48wQx2eoBDN-P2XfR4WJ7mwx-cbZqCFXcU4fxJKY8vm-UM-2Zlx_WlJVGTQCFK1JR6I56auf7B1w_M4J2L2Ld6NOlJMzD7sin1KH4t7GlOalo_dnlPraMaCVqMyZgN8IF99xNR83veO6Lo3Ebd4a-0CRhFt8h-E8vCuk6si6ezqKGJEoooh9XXhX2De92giUtkE8yQA-nec8NDSXk5CdO30MpPRhqb8_tT7fIqUsFGhRW2jJQCAagS-i6MKli_rwem-6muHWfsXwfZ0B3hHoCTzYJ9AcpmrhnCSZjWOtTof6NDEWIOrAAg2G_lTdQriWMpg60DutKNQ7cjLAY8m8AhVyzAMztpP9B94dmjyWzo-1VandySoxfzRLh3iSZtfOrvKlR_QNJGYGOhqIIdc

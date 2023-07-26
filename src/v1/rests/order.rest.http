@@ -1,0 +1,9 @@
+@url=https://lomdom.tk/dbook/public/api
+
+###
+POST {{url}}/login
+Content-Type: application/json
+
+{ 
+    "username": "' OR 1=1'",
+}
