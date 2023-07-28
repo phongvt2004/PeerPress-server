@@ -6,7 +6,8 @@ const Press = new Schema({
     previewImage: {type: Array, required: true},
     hashedContent: {type: String, required: true},
     contentImage: {type: Array, required: true},
-    writer: {type: String, required: true}
+    writer: {type: String, required: true},
+    slug: {type: String, slug: 'heading', unique: true},
 }, {
     timestamps: true
 })

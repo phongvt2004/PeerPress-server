@@ -14,5 +14,6 @@ mongoose.set('debug', { color: false })
 // get mongodb-shell friendly output (ISODate)
 mongoose.set('debug', { shell: true })
 
+mongoose.plugin(require('mongoose-slug-generator'));
 
 module.exports = mongoose;
