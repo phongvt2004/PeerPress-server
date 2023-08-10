@@ -1,5 +1,5 @@
 const {Schema, model} = require('mongoose');
-const Press = new Schema({
+const Consult = new Schema({
     name: {type: String, required: true},
     school: {type: String, required: true},
     class: {type: String, required: true},
@@ -8,4 +8,4 @@ const Press = new Schema({
 }, {
     timestamps: true
 })
-module.exports = model('Press', Press)
+module.exports = model('Consult', Consult)
