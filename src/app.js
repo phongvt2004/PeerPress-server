@@ -6,14 +6,18 @@ const helmet = require('helmet')
 const morgan = require('morgan')
 const compression = require('compression')
 const cors = require('cors')
+const path = require('path');
 //init dbs 
 require('./v1/databases/init.mongodb')
 require('./v1/databases/init.redis')
 
 //user middleware
-app.use(helmet())
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+  }))
 app.use(morgan('combined'))
 app.use(cors())
+app.use('/public', express.static(path.join(__dirname, 'v1/public')))
 // compress responses
 app.use(compression({
     level: 6,

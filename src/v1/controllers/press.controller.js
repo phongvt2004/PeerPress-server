@@ -20,7 +20,7 @@ class PressController {
                 previewImage,
                 hashedContent,
                 contentImage,
-                writer
+                writer: writer? writer:'admin'
             })
 
             res.json(data)
