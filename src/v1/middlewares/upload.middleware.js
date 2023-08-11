@@ -12,4 +12,12 @@ var storage = multer.diskStorage({
 
   var upload = multer({ storage: storage })
 
-module.exports = {upload}
+const uploadResponse = (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        message: 'upload file successfully',
+        filePath: req.file.path.replace(path.join(__dirname, '../'), '')
+    })
+}
+
+module.exports = {upload, uploadResponse}
