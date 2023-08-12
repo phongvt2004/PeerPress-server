@@ -5,11 +5,11 @@ const pressRouter = require('./press.router');
 const {upload, uploadResponse} = require('../middlewares/upload.middleware');
 const path = require('path');
 
-router.use('/v1/api/writer', writerRouter)
-router.use('/v1/api/press', pressRouter)
-router.use('/v1/api/upload', upload.single('file'), uploadResponse);
+router.use('/api/v1/writer', writerRouter)
+router.use('/api/v1/press', pressRouter)
+router.use('/api/v1/upload', upload.single('file'), uploadResponse);
 
-router.post('/test', (req, res, next) => {
+router.post('/api/test', (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: 'api ok',
