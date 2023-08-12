@@ -11,22 +11,29 @@ services:
     restart: always
     volumes:
       - db-data:/data/db
-  web:
+  server:
     build: .
     ports:
       - "3001:3000"
     volumes:
-      - web-data:/usr/src/app/src/v1/public
+      - server-data:/usr/src/app/src/v1/public
     depends_on:
       - redis
       - db
     links:
       - redis
       - db
+  client:
+    build: ../client
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - server
 volumes:
   redis-data:
     driver: local
-  web-data:
+  server-data:
     driver: local
   db-data:
     driver: local
