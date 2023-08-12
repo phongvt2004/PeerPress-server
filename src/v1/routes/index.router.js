@@ -7,9 +7,9 @@ const path = require('path');
 
 router.use('/api/v1/writer', writerRouter)
 router.use('/api/v1/press', pressRouter)
-router.use('/api/v1/upload', upload.single('file'), uploadResponse);
+router.post('/api/v1/upload', upload.single('file'), uploadResponse);
 
-router.post('/api/test', (req, res, next) => {
+router.get('/api', (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: 'api ok',
