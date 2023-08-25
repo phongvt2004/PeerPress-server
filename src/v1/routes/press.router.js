@@ -7,4 +7,9 @@ router.get('/test', (req, res) => {
     res.json("data")
 })
 
+router.post('/test/post', (req, res) => {
+    res.json("data")
+})
+
+
 module.exports = router
