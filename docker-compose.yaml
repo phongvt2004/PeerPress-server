@@ -23,3 +23,8 @@ services:
       - "3000:80"
     depends_on:
       - server
+volumes:
+  redis-data:
+    driver: local
+  server-data:
+    driver: local
