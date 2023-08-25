@@ -14,10 +14,8 @@ services:
       - server-data:/usr/src/app/src/v1/public
     depends_on:
       - redis
-      - db
     links:
       - redis
-      - db
   client:
     build: ../client
     restart: always
@@ -25,10 +23,3 @@ services:
       - "3000:80"
     depends_on:
       - server
-volumes:
-  redis-data:
-    driver: local
-  server-data:
-    driver: local
-  db-data:
-    driver: local
