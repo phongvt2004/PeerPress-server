@@ -22,6 +22,27 @@ class PressService {
             return createError.NotFound("Press not found")
         }
     }
+    
+    static update = async(data) => {
+        const press = await Press.findOneAndUpdate({slug: data.slug},data)
+        if(press) {
+            return press
+        } else {
+            return createError.InternalServerError("Cannot update press")
+        }
+    }
+
+    static getByType = async({type}) => {
+        const press = await Press.find({type})
+        if(press) return press
+        else return createError.NotFound("Type not found")
+    }
+
+    static getBySlug = async({slug}) => {
+        const press = await Press.find({slug})
+        if(press) return press
+        else return createError.NotFound("Slug not found")
+    }
 }
 
 module.exports = PressService
