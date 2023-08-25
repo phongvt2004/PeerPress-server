@@ -6,6 +6,17 @@ services:
       - redis-data:/data
     ports:
       - "6379:6379"
+    expose:
+      - 6379
+  db:
+    image: "mongo"
+    restart: always
+    volumes:
+      - db-data:/data/db
+    ports:
+      - "27017:27017"
+    expose:
+      - 27017
   server:
     build: .
     ports:
@@ -27,4 +38,6 @@ volumes:
   redis-data:
     driver: local
   server-data:
+    driver: local
+  db-data:
     driver: local

@@ -1,0 +1,205 @@
+[33mcommit 5f91633f66dade8d6d0fe4debd720b60908fb487[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: root <root@localhost.localdomain>
+Date:   Sat Aug 26 01:00:15 2023 +0700
+
+    update
+
+[33mcommit 1c96ae84bd27766875892706971bddc98a5b7580[m
+Merge: fcee29f 9ed7046
+Author: root <root@localhost.localdomain>
+Date:   Sat Aug 26 00:26:35 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit 9ed7046707428614a1a551b0e6365c5391136b0e[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Sat Aug 26 00:25:58 2023 +0700
+
+    update
+
+[33mcommit fcee29fda9901c8b610084f88e57593e4c046ca7[m
+Merge: f709128 0e86d01
+Author: root <root@localhost.localdomain>
+Date:   Fri Aug 25 23:58:41 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit 0e86d011a2503893a3e20e8ffbbc0c334edcf667[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 23:58:13 2023 +0700
+
+    update
+
+[33mcommit f709128fdc6b73c9ad4efce23b2c213bb243d0bf[m
+Merge: c011dac c99a827
+Author: root <root@localhost.localdomain>
+Date:   Fri Aug 25 23:33:13 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit c99a827dc2344edb0d1538a28da267ee89ae3d7d[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 23:32:41 2023 +0700
+
+    update
+
+[33mcommit c011dac51bdf424901f1a74b7ed61297f05498af[m
+Merge: 31ce728 49db1f8
+Author: root <root@localhost.localdomain>
+Date:   Fri Aug 25 23:19:31 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit 49db1f86c4ce9d64dbfefef3ac3196f27d2f27eb[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 23:19:09 2023 +0700
+
+    update
+
+[33mcommit 31ce728747f12f5adbc954649186ab98c27ffd9c[m
+Merge: 75478a6 1533884
+Author: root <root@localhost.localdomain>
+Date:   Fri Aug 25 23:17:49 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit 153388456a963b1a9bb34783db16015dba1a2c9b[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 23:17:19 2023 +0700
+
+    update
+
+[33mcommit 75478a6776c2b7b1fe16b4975d70ed55f544a88f[m
+Merge: fe458dd 799f0dc
+Author: root <root@localhost.localdomain>
+Date:   Fri Aug 25 23:09:58 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit 799f0dc23cb6ab85414aaf631f6631c872ac4f16[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 17:51:32 2023 +0700
+
+    update db
+
+[33mcommit fe458dd4741ff50dcb3c443849dd2b9b1257dec7[m
+Merge: 8ccd05e d0c2e8e
+Author: root <root@localhost.localdomain>
+Date:   Fri Aug 25 16:55:52 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit d0c2e8ed60ef98d1fa782ff5b09cbc481f2b2f6f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 16:55:30 2023 +0700
+
+    update port
+
+[33mcommit 8ccd05ee90e7a31156b38be6352314758f560b88[m
+Merge: 0029192 e96e64c
+Author: root <root@localhost.localdomain>
+Date:   Fri Aug 25 16:43:52 2023 +0700
+
+    Merge branch 'main' of https://github.com/phongvt2004/PeerPress-server
+
+[33mcommit e96e64c8e90ce410d5d3867e69a33bb4516d2e21[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 16:41:21 2023 +0700
+
+    update route
+
+[33mcommit e809a53d3a86c707724a4be67fd514b60d10259a[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 16:32:56 2023 +0700
+
+    update
+
+[33mcommit 57428c6bca81cffa12b483965ca112f809c555b0[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 16:25:33 2023 +0700
+
+    update
+
+[33mcommit 018a26300bff1f8b18c30694e159fd9fec827396[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 25 16:25:12 2023 +0700
+
+    update
+
+[33mcommit 002919287d1f699f139cfbd9e087f8043e1fb319[m
+Author: root <root@localhost.localdomain>
+Date:   Tue Aug 15 22:51:30 2023 +0700
+
+    update monitoring
+
+[33mcommit b2dfa3d47da8c25fa446d861025c70a0d964573c[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Mon Aug 14 13:34:28 2023 +0700
+
+    monitoring update
+
+[33mcommit da4c32118d42e108bb76a4e58d252d8da749ed9a[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Mon Aug 14 13:34:06 2023 +0700
+
+    monitoring
+
+[33mcommit e980b667391fd3ce8882dc7596963bcc7d00765e[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Sun Aug 13 01:14:15 2023 +0700
+
+    update new file
+
+[33mcommit e49c13a9389f14a86f30b46fbd2f6c60ab659aeb[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Sun Aug 13 01:04:48 2023 +0700
+
+    update route
+
+[33mcommit 059cc088539fc5dc8a6b288c4eefce7621b6d86f[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Sat Aug 12 20:00:35 2023 +0700
+
+    update route
+
+[33mcommit 059d68cde9c0dc8efbb6cd5817e9389636118f96[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Sat Aug 12 19:10:45 2023 +0700
+
+    update route
+
+[33mcommit 12369fad67ed66e87b8ecb3353b2cea1d3840cd6[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Sat Aug 12 15:02:44 2023 +0700
+
+    update docker
+
+[33mcommit 7339aafac126b2acb2139b5534927d15d6919968[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 11 18:21:33 2023 +0700
+
+    update
+
+[33mcommit b25be6506c53cadb6b8e30415c966ee386413091[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Aug 11 03:30:50 2023 +0700
+
+    update cors
+
+[33mcommit ed227115c2b7d68e03cce547c9783ce5ab7e42b4[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Thu Aug 10 21:54:22 2023 +0700
+
+    update port
+
+[33mcommit 0e16828a50aeefc4ae669cc0c3090e4e88749434[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Fri Jul 28 22:13:58 2023 +0700
+
+    update
+
+[33mcommit 515b194bdb8d55d2ef65f1ace7f452434e07e6a8[m[33m ([m[1;31morigin/phong[m[33m)[m
+Author: phongvt2004 <ntp11892vt@gmail.com>
+Date:   Wed Jul 26 22:54:13 2023 +0700
+
+    first commit
