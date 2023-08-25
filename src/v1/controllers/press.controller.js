@@ -4,17 +4,19 @@ class PressController {
     async create(req, res, next) {
         try {
             const{
-                writerheading,
+                heading,
                 type,
                 preview,
+                thumbnail,
                 content,
                 writer
             } = req.body
             
             const data = await PressService.create({
-                writerheading,
+                heading,
                 type,
                 preview,
+                thumbnail,
                 content,
                 writer: writer? writer:'admin'
             })
