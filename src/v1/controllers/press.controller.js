@@ -72,11 +72,13 @@ class PressController {
     async getByType(req, res, next) {
         try {
             const {
-                type
-            } = req.body
+                type,
+                load
+            } = req.query
 
-            const data = await PressService.get({
-                type
+            const data = await PressService.getByType({
+                type,
+                load: load ? load : 1
             })
 
             res.json(data)
@@ -88,10 +90,26 @@ class PressController {
         try {
             const {
                 slug
-            } = req.body
+            } = req.query
 
-            const data = await PressService.get({
+            const data = await PressService.getBySlug({
                 slug
+            })
+
+            res.json(data)
+        } catch (error) {
+            res.json(error)
+        }
+    }
+
+    async getNewPost(req, res, next) {
+        try {
+            const {
+                number
+            } = req.query
+
+            const data = await PressService.getNewPost({
+                number
             })
 
             res.json(data)
