@@ -31,7 +31,7 @@ class PressController {
         try {      
             const {
                 pressId
-            } = req.body
+            } = req.query
 
             const data = await PressService.get({
                 pressId
@@ -107,7 +107,6 @@ class PressController {
             const {
                 number
             } = req.query
-
             const data = await PressService.getNewPost({
                 number
             })
