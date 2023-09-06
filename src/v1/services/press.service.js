@@ -32,8 +32,9 @@ class PressService {
         }
     }
 
-    static getByType = async({type}) => {
-        const press = await Press.find({type})
+    static getByType = async({type, load}) => {
+        const perLoad = 5
+        const press = await Press.find({type}).skip(perLoad*load-perLoad).limit(perLoad)
         if(press) return press
         else return createError.NotFound("Type not found")
     }
@@ -42,6 +43,12 @@ class PressService {
         const press = await Press.find({slug})
         if(press) return press
         else return createError.NotFound("Slug not found")
+    }
+
+    static getNewPost = async({number}) => {
+        const press = await Press.find().limit(number)
+        if(press) return press
+        else return createError.NotFound("Not found any press")
     }
 }
 

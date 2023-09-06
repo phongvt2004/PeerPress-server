@@ -5,11 +5,11 @@ services:
     container_name: cadvisor
     # ports:
     # - "8080:8080"
-    volumes:
-    - /:/rootfs:ro
-    - /var/run:/var/run:rw
-    - /sys:/sys:ro
-    - /var/lib/docker/:/var/lib/docker:ro
+    # volumes:
+    #- /:/rootfs:ro
+    #- /var/run:/var/run:rw
+    #- /sys:/sys:ro
+    #- /var/lib/docker/:/var/lib/docker:ro
   node-exporter:
     image: prom/node-exporter:latest
     container_name: monitoring_node_exporter
@@ -23,10 +23,10 @@ services:
     command:
     - --config.file=/etc/prometheus/prometheus.yml
     user: "${USER}"
-    volumes:
-    - ./data/prometheus/config:/etc/prometheus/
-    - ./data/prometheus/data:/prometheus
-    - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    #volumes:
+    #- ./data/prometheus/config:/etc/prometheus/
+    #- ./data/prometheus/data:/prometheus
+    #- ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     depends_on:
     - cadvisor
     - node-exporter

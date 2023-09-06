@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 //connect mongoose
-mongoose.connect( process.env.MONGO_URI, {
+mongoose.connect( 'mongodb://db:27017/peer-press', {
     autoIndex: true, 
 }).then( _ => console.log('Connected mongoose success!...'))
 .catch( err => console.error(`Error: connect:::`, err))
@@ -14,6 +14,6 @@ mongoose.set('debug', { color: false })
 // get mongodb-shell friendly output (ISODate)
 mongoose.set('debug', { shell: true })
 
-mongoose.plugin(require('mongoose-slug-generator'));
+mongoose.plugin(require('mongoose-slug-updater'));
 
 module.exports = mongoose;
