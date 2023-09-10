@@ -14,7 +14,7 @@ class PressController {
             
             const data = await PressService.create({
                 heading,
-                type,
+                type: type.toUpperCase(),
                 preview,
                 thumbnail,
                 content,
