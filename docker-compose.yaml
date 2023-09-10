@@ -3,7 +3,7 @@ services:
   redis:
     image: redis
     volumes:
-      - data/redis:/data
+      - ./data/redis:/data
     ports:
       - "6379:6379"
     expose:
@@ -12,7 +12,7 @@ services:
     image: "mongo"
     restart: always
     volumes:
-      - data/mongo:/data/db
+      - ./data/mongo:/data/db
     ports:
       - "27017:27017"
     expose:
