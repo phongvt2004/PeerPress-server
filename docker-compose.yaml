@@ -22,7 +22,7 @@ services:
     ports:
       - "3001:${PORT}"
     volumes:
-      - /src/v1/public:/usr/src/app/src/v1/public
+      - ./src/v1/public:/usr/src/app/src/v1/public
     depends_on:
       - redis
     links:
