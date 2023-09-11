@@ -12,12 +12,15 @@ services:
     image: "mongo"
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_DATABASE=peer-press
+      - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=PeerPress123
     volumes:
       - ./data/mongo:/data/db
-    # ports:
-    #   - "27017:27017"
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+    ports:
+      - "27017:27017"
     expose:
       - 27017
   server:
@@ -30,10 +33,10 @@ services:
       - redis
     links:
       - redis
-  client:
-    build: ../client
-    restart: always
-    ports:
-      - "3000:80"
-    depends_on:
-      - server
+  # client:
+  #   build: ../client
+  #   restart: always
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - server

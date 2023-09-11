@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const url = process.env.MONGO_URI
 //connect mongoose
-mongoose.connect( 'mongodb://admin:PeerPress123@db:27017/peer-press', {
+mongoose.connect( url, {
     autoIndex: true, 
 }).then( _ => console.log('Connected mongoose success!...'))
 .catch( err => console.error(`Error: connect:::`, err))
