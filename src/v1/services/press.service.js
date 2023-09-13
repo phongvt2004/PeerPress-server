@@ -32,22 +32,55 @@ class PressService {
         }
     }
 
+    static getByTypeNumber = async({type, number}) => {
+        const press = await Press.aggregate([{
+            $match: {type: type},
+        },
+        {
+            $sort: {updateAt: -1}
+        },
+        {
+            $limit: number
+        }])
+        if(press.length>0) return press
+        else return createError.NotFound("Type not found")
+    }
+
     static getByType = async({type, load}) => {
         const perLoad = 5
-        const press = await Press.find({type}).skip(perLoad*load-perLoad).limit(perLoad)
-        if(press) return press
+        const press = await Press.aggregate([{
+            $match: {type: type},
+        },
+        {
+            $skip: perLoad*load-perLoad
+        },
+        {
+            $sort: {updateAt: -1}
+        },
+        {
+            $limit: perLoad
+        }])
+        if(press.length>0) return press
         else return createError.NotFound("Type not found")
     }
 
     static getBySlug = async({slug}) => {
-        const press = await Press.find({slug})
+        const press = await Press.findOne({slug})
         if(press) return press
         else return createError.NotFound("Slug not found")
     }
 
     static getNewPost = async({number}) => {
-        const press = await Press.find().limit(number)
-        if(press) return press
+        console.log("-------------")
+        const press = await Press.aggregate([
+        {
+            $sort: {updateAt: -1}
+        },
+        {
+            $limit: Number(number)
+        }]).sort({updateAt: -1})
+        console.log(press)
+        if(press.length>0) return press
         else return createError.NotFound("Not found any press")
     }
 }

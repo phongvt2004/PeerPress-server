@@ -1,4 +1,5 @@
 const PressService = require('../services/press.service')
+const createError = require('http-errors')
 
 class PressController {
     async create(req, res, next) {
@@ -14,7 +15,7 @@ class PressController {
             
             const data = await PressService.create({
                 heading,
-                type,
+                type: type.toUpperCase(),
                 preview,
                 thumbnail,
                 content,
@@ -23,7 +24,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(error)
+            res.json(createError.InternalServerError(error))
         }
     }
 
@@ -39,7 +40,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(error)
+            res.json(createError.InternalServerError(error))
         }
         
     }
@@ -66,7 +67,24 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(error)
+            res.json(createError.InternalServerError(error))
+        }
+    }
+
+    async getByTypeNumber(req, res, next) {
+        try {
+            const {
+                type,
+                number
+            } = req.query
+            const data = await PressService.getByTypeNumber({
+                type,
+                number
+            })
+
+            res.json(data)
+        } catch (error) {
+            res.json(createError.InternalServerError(error))
         }
     }
     async getByType(req, res, next) {
@@ -83,7 +101,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(error)
+            res.json(createError.InternalServerError(error))
         }
     }
     async getBySlug(req, res, next) {
@@ -98,7 +116,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(error)
+            res.json(createError.InternalServerError(error))
         }
     }
 
@@ -113,7 +131,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(error)
+            res.json(createError.InternalServerError(error))
         }
     }
 }

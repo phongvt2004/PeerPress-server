@@ -3,16 +3,22 @@ services:
   redis:
     image: redis
     volumes:
-      - redis-data:/data
-    ports:
-      - "6379:6379"
+      - ./data/redis:/data
+    # ports:
+    #   - "6379:6379"
     expose:
       - 6379
   db:
     image: "mongo"
     restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=peer-press
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=PeerPress123
     volumes:
-      - db-data:/data/db
+      - ./data/mongo:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
     ports:
       - "27017:27017"
     expose:
@@ -22,7 +28,7 @@ services:
     ports:
       - "3001:${PORT}"
     volumes:
-      - server-data:/usr/src/app/src/v1/public
+      - ./src/v1/public:/usr/src/app/src/v1/public
     depends_on:
       - redis
     links:
@@ -34,10 +40,3 @@ services:
       - "3000:80"
     depends_on:
       - server
-volumes:
-  redis-data:
-    driver: local
-  server-data:
-    driver: local
-  db-data:
-    driver: local
