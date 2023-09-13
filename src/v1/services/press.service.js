@@ -74,11 +74,11 @@ class PressService {
         console.log("-------------")
         const press = await Press.aggregate([
         {
-            $sort: {updateAt: 1}
+            $sort: {updateAt: -1}
         },
         {
             $limit: Number(number)
-        }])
+        }]).sort({updateAt: -1})
         console.log(press)
         if(press.length>0) return press
         else return createError.NotFound("Not found any press")
