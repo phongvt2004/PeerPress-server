@@ -71,14 +71,14 @@ class PressService {
     }
 
     static getNewPost = async({number}) => {
+        console.log("-------------")
         const press = await Press.aggregate([
         {
             $sort: {updateAt: -1}
         },
         {
-            $limit: number
+            $limit: Number(number)
         }])
-        console.log("-------------")
         console.log(press)
         if(press.length>0) return press
         else return createError.NotFound("Not found any press")
