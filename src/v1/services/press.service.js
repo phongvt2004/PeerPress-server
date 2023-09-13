@@ -74,7 +74,7 @@ class PressService {
         console.log("-------------")
         const press = await Press.aggregate([
         {
-            $sort: {updateAt: -1}
+            $sort: {updateAt: 1}
         },
         {
             $limit: Number(number)
