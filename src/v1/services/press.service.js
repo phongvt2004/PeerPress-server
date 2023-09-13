@@ -78,6 +78,7 @@ class PressService {
         {
             $limit: number
         }])
+        console.log("-------------")
         console.log(press)
         if(press.length>0) return press
         else return createError.NotFound("Not found any press")
