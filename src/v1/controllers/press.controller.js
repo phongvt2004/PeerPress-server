@@ -24,7 +24,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(createError.InternalServerError(error))
+            next(createError.InternalServerError(error))
         }
     }
 
@@ -40,7 +40,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(createError.InternalServerError(error))
+            next(createError.InternalServerError(error))
         }
         
     }
@@ -67,7 +67,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(createError.InternalServerError(error))
+            next(createError.InternalServerError(error))
         }
     }
 
@@ -84,7 +84,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(createError.InternalServerError(error))
+            next(createError.InternalServerError(error))
         }
     }
     async getByType(req, res, next) {
@@ -101,7 +101,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(createError.InternalServerError(error))
+            next(createError.InternalServerError(error))
         }
     }
     async getBySlug(req, res, next) {
@@ -116,7 +116,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(createError.InternalServerError(error))
+            next(createError.InternalServerError(error))
         }
     }
 
@@ -131,7 +131,24 @@ class PressController {
 
             res.json(data)
         } catch (error) {
-            res.json(createError.InternalServerError(error))
+            next(createError.InternalServerError(error))
+        }
+    }
+
+    async searchPress(req, res, next) {
+        try {
+            const {
+                keyword,
+                load
+            } = req.query
+            const data = await PressService.searchPress({
+                keyword,
+                load
+            })
+
+            res.json(data)
+        } catch (error) {
+            next(createError.InternalServerError(error))
         }
     }
 }

@@ -37,7 +37,7 @@ class PressService {
             $match: {type: type},
         },
         {
-            $sort: {updateAt: -1}
+            $sort: {_id: -1}
         },
         {
             $limit: number
@@ -52,10 +52,10 @@ class PressService {
             $match: {type: type},
         },
         {
-            $skip: perLoad*load-perLoad
+            $sort: {_id: -1}
         },
         {
-            $sort: {updateAt: -1}
+            $skip: perLoad*load-perLoad
         },
         {
             $limit: perLoad
@@ -80,6 +80,28 @@ class PressService {
             $limit: Number(number)
         }])
         console.log(press)
+        if(press.length>0) return press
+        else return createError.NotFound("Not found any press")
+    }
+
+    static searchPress = async({keyword, load}) => {
+        const perLoad = 10
+        const press = await Press.aggregate([
+            {
+                $addFields: {
+                    results: { $regexFindAll: {input: '$heading', regex: '/.*'+keyword+'.*/gm' }}
+                }
+            },
+            {
+                $sort: {_id: -1}
+            },
+            {
+                $skip: perLoad*load-perLoad
+            },
+            {
+                $limit: perLoad
+            }
+        ])
         if(press.length>0) return press
         else return createError.NotFound("Not found any press")
     }
