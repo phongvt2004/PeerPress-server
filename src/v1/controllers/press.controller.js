@@ -139,10 +139,12 @@ class PressController {
         try {
             const {
                 keyword,
+                type,
                 load
             } = req.query
             const data = await PressService.searchPress({
                 keyword,
+                type,
                 load
             })
 

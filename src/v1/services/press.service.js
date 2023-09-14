@@ -84,9 +84,12 @@ class PressService {
         else return createError.NotFound("Not found any press")
     }
 
-    static searchPress = async({keyword, load}) => {
+    static searchPress = async({keyword, type, load}) => {
         const perLoad = 10
         const press = await Press.aggregate([
+            {
+                $match: {type: type}
+            },
             {
                 $addFields: {
                     results: { $regexFindAll: {input: '$heading', regex: '/.*'+keyword+'.*/gm' }}
