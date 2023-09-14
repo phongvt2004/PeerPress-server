@@ -90,7 +90,7 @@ class PressService {
             {
                 $match: {
                     type: type,
-                    heading: {$regex: new RegExp(`.*${keyword}.*`,igm)}
+                    heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')}
                 }
             },
             {
