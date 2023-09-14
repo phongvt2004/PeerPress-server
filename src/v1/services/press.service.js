@@ -86,10 +86,25 @@ class PressService {
 
     static searchPress = async({keyword, type, load}) => {
         const perLoad = 10
-        const press = await Press.aggregate([
+        const press =type ? await Press.aggregate([
             {
                 $match: {type: type}
             },
+            {
+                $addFields: {
+                    results: { $regexFindAll: {input: '$heading', regex: '/.*'+keyword+'.*/gm' }}
+                }
+            },
+            {
+                $sort: {_id: -1}
+            },
+            {
+                $skip: perLoad*load-perLoad
+            },
+            {
+                $limit: perLoad
+            }
+        ]) : await Press.aggregate([
             {
                 $addFields: {
                     results: { $regexFindAll: {input: '$heading', regex: '/.*'+keyword+'.*/gm' }}
