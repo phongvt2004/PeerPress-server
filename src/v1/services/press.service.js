@@ -88,11 +88,9 @@ class PressService {
         const perLoad = 10
         const press =type ? await Press.aggregate([
             {
-                $match: {type: type}
-            },
-            {
-                $addFields: {
-                    results: { $regexFindAll: {input: '$heading', regex: '/.*'+keyword+'.*/gm' }}
+                $match: {
+                    type: type,
+                    heading: {$regex: /.*keyword.*/igm}
                 }
             },
             {
@@ -106,8 +104,8 @@ class PressService {
             }
         ]) : await Press.aggregate([
             {
-                $addFields: {
-                    results: { $regexFindAll: {input: '$heading', regex: '/.*'+keyword+'.*/gm' }}
+                $match: {
+                    heading: {$regex: /.*keyword.*/igm}
                 }
             },
             {
