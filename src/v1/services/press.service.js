@@ -90,7 +90,7 @@ class PressService {
             {
                 $match: {
                     type: type,
-                    heading: {$regex: /.*keyword.*/igm}
+                    heading: {$regex: new RegExp(`.*${keyword}.*`,igm)}
                 }
             },
             {
@@ -105,7 +105,7 @@ class PressService {
         ]) : await Press.aggregate([
             {
                 $match: {
-                    heading: {$regex: /.*keyword.*/igm}
+                    heading: {$regex: new RegExp(`.*${keyword}.*`,igm)}
                 }
             },
             {
