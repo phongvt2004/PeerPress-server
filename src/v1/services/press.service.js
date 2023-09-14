@@ -92,15 +92,15 @@ class PressService {
                     results: { $regexFindAll: {input: '$heading', regex: '/.*'+keyword+'.*/gm' }}
                 }
             },
-            {
-                $sort: {_id: -1}
-            },
-            {
-                $skip: perLoad*load-perLoad
-            },
-            {
-                $limit: perLoad
-            }
+            // {
+            //     $sort: {_id: -1}
+            // },
+            // {
+            //     $skip: perLoad*load-perLoad
+            // },
+            // {
+            //     $limit: perLoad
+            // }
         ])
         if(press.length>0) return press
         else return createError.NotFound("Not found any press")
