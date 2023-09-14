@@ -150,6 +150,7 @@ class PressController {
 
             res.json(data)
         } catch (error) {
+            console.log(error)
             next(createError.InternalServerError(error))
         }
     }
