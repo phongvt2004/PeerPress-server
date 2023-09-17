@@ -13,6 +13,7 @@ module.exports = {
             if(!privateKey) {
                 let {newPrivateKey, publicKey} = keyGen()
                 await client.set(`${userId}-access`, publicKey)
+                console.log(newPrivateKey)
                 privateKey = newPrivateKey
             }
             console.log(userId, privateKey)

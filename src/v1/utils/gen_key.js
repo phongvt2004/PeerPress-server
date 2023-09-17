@@ -12,6 +12,5 @@ module.exports = () => {
             format: 'pem',
           },
     })
-    console.log(privateKey)
     return {privateKey, publicKey}
 }
