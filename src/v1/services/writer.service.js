@@ -17,12 +17,12 @@ class WriterService {
                 }
             }
             const hash = await bcrypt.hash(password, saltRounds)
-            await Writer.create({
+            const User = new Writer({
                 username,
                 type,
                 password: hash
             })
-            const result = await Writer.findOne({username})
+            const result = await User.save()
             return result
         } catch (error) {
             console.log(error)
