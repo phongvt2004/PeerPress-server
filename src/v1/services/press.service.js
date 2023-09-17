@@ -32,6 +32,21 @@ class PressService {
         }
     }
 
+    static updateData = async () => {
+        const presses = await Press.find()
+        for(let press of presses) {
+            press.views = 0;
+            let date = new Date(press.createdAt);
+            press.date = {
+                week: date.getWeek(),
+                month: date.getMonth() + 1,
+                year: date.getFullYear()
+            }
+            await Press.updateOne({_id: press._id}, press)
+        }
+        return "ok"
+    }
+
     static getByTypeNumber = async({type, number}) => {
         const press = await Press.aggregate([{
             $match: {type: type},
@@ -66,6 +81,8 @@ class PressService {
 
     static getBySlug = async({slug}) => {
         const press = await Press.findOne({slug})
+        press.views++
+        await Press.updateOne({_id: press._id}, press)
         if(press) return press
         else return createError.NotFound("Slug not found")
     }
@@ -80,6 +97,19 @@ class PressService {
             $limit: Number(number)
         }])
         console.log(press)
+        if(press.length>0) return press
+        else return createError.NotFound("Not found any press")
+    }
+
+    static getPopularPost = async({number}) => {
+        const press = await Press.aggregate([
+            {
+                $sort: {views: -1}
+            },
+            {
+                $limit: Number(number)
+            }
+        ])
         if(press.length>0) return press
         else return createError.NotFound("Not found any press")
     }

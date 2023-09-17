@@ -6,6 +6,12 @@ const Press = new Schema({
     thumbnail: {type: String, required: true},
     content: {type: String, required: true},
     writer: {type: String, required: true},
+    views: {type: Number, required: true},
+    date: {
+        week: {type: Number, required: true},
+        month: {type: Number, required: true},
+        year: {type: Number, required: true},
+    },
     slug: {type: String, slug: 'heading', unique: true},
 }, {
     timestamps: true

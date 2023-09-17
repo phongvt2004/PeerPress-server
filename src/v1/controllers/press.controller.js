@@ -12,13 +12,20 @@ class PressController {
                 content,
                 writer
             } = req.body
-            
+            const today = new Date()
+            let date = {
+                week: today.getWeek(),
+                month : today.getMonth(),
+                year : today.getFullYear()
+            }
             const data = await PressService.create({
                 heading,
                 type: type.toUpperCase(),
                 preview,
                 thumbnail,
                 content,
+                date: date,
+                views :0, 
                 writer: writer? writer:'admin'
             })
 
@@ -68,6 +75,19 @@ class PressController {
             res.json(data)
         } catch (error) {
             next(createError.InternalServerError(error))
+        }
+    }
+
+    async updateData(req, res, next) {
+        try {
+            if(req.body?.token === "This is update token") {
+                const data = await PressService.updateData()
+                res.json(data)
+            } else {
+                res.json(createError.Forbidden("Wrong token"))
+            }
+        } catch (error) {
+            res.json(createError.InternalServerError(error))
         }
     }
 
@@ -132,6 +152,18 @@ class PressController {
             res.json(data)
         } catch (error) {
             next(createError.InternalServerError(error))
+        }
+    }
+
+    async getPopularPost(req, res, next) {
+        try {
+            const {
+               number 
+            } = req.query
+            const data = await PressService.getPopularPost({number})
+            res.json(data)
+        } catch (error) {
+            res.json(createError.InternalServerError(error))
         }
     }
 
