@@ -152,6 +152,11 @@ class PressService {
         if(press.length>0) return press
         else return createError.NotFound("Not found any press")
     }
+
+    async deletePress({pressId}) {
+        let press = await Press.deleteOne({_id: pressId})
+        return press
+    }
 }
 
 module.exports = PressService

@@ -186,6 +186,18 @@ class PressController {
             next(createError.InternalServerError(error))
         }
     }
+
+    async deletePress(req, res, next) {
+        try {
+            const {
+                pressId
+            } = req.query
+            const data = await PressService.deletePress({pressId})
+            res.json(data)
+        } catch (error) {
+            res.json(createError.InternalServerError(error))
+        }
+    }
 }
 
 module.exports = new PressController()

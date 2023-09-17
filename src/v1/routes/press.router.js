@@ -12,6 +12,7 @@ router.get('/get/slug', PressController.getBySlug)
 router.get('/get/newpost', PressController.getNewPost)
 router.get('/get/popular', PressController.getPopularPost)
 router.get('/search', PressController.searchPress)
+router.delete('/delete', PressController.deletePress)
 
 router.get('/test', (req, res) => {
     res.json("data")
