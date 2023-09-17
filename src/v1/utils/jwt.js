@@ -19,7 +19,11 @@ module.exports = {
                 expiresIn: '1m'
             }
             jwt.sign(payload, privateKey, options, async(err, token) => {
-                if (err?.message) reject(err)
+                if (err?.message) {
+                    console.log(err)
+                    reject(err)
+                }
+                console.log({token, privateKey})
                 resolve({token, privateKey})
             })
             
