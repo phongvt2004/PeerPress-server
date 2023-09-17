@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 class WriterService {
     static create = async({
         username,
+        type,
         password
     }) => {
         try {

@@ -9,10 +9,12 @@ class WriterController {
         try {
             const{
                 username,
+                type,
                 password
             } = req.body
             const data = await writerService.create({
                 username,
+                type,
                 password
             })
             if (data?.status === 400) {
