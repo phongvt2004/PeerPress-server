@@ -9,11 +9,13 @@ module.exports = {
             const payload = {
                 userId,
             }
+            console.log(userId, privateKey)
             if(!privateKey) {
-                let {newPrivateKey, publicKey} = await keyGen()
+                let {newPrivateKey, publicKey} = keyGen()
                 await client.set(`${userId}-access`, publicKey)
                 privateKey = newPrivateKey
             }
+            console.log(userId, privateKey)
             const options = {
                 algorithm: 'RS256',
                 expiresIn: '1m'
