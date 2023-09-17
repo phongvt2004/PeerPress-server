@@ -19,7 +19,7 @@ module.exports = {
                 expiresIn: '1m'
             }
             jwt.sign(payload, privateKey, options, async(err, token) => {
-                if (err) reject(err)
+                if (err?.message) reject(err)
                 resolve({token, privateKey})
             })
             
@@ -59,7 +59,7 @@ module.exports = {
                 expiresIn: '1y'
             }
             jwt.sign(payload, privateKey, options, async(err, token) => {
-                if (err) reject(createError.InternalServerError())
+                if (err?.message) reject(createError.InternalServerError())
                 await client.setEx(`${userId}-token`, 365*24*60*60, token)
                 resolve({token, privateKey})
             })
