@@ -5,7 +5,7 @@ const {verifyAccessToken} = require('../utils/jwt')
 const {authValidate} = require('../middlewares/validate.middleware')
 const {checkBlackList, createNewToken} = require('../middlewares/jwt.middleware')
 
-router.post('/create', authValidate, WriterController.create)
+router.post('/create', WriterController.create)
 router.post('/login', WriterController.login)
 router.post('/refreshToken', checkBlackList, createNewToken)
 
