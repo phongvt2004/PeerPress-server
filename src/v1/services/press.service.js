@@ -56,6 +56,12 @@ class PressService {
         },
         {
             $limit: number
+        },
+        {
+            $project: {
+                _id: 0,
+                date: 0,
+            }
         }])
         if(press.length>0) return press
         else return createError.NotFound("Type not found")
@@ -74,6 +80,12 @@ class PressService {
         },
         {
             $limit: perLoad
+        },
+        {
+            $project: {
+                _id: 0,
+                date: 0,
+            }
         }])
         if(press.length>0) return press
         else return createError.NotFound("Type not found")
@@ -83,7 +95,13 @@ class PressService {
         const press = await Press.findOne({slug})
         press.views++
         await Press.updateOne({_id: press._id}, press)
-        if(press) return press
+        if(press) return {
+            preview: press.preview,
+            content: press.content,
+            thumbnail: press.thumbnail,
+            type: press.type,
+            heading: press.heading,
+        }
         else return createError.NotFound("Slug not found")
     }
 
@@ -95,6 +113,12 @@ class PressService {
         },
         {
             $limit: Number(number)
+        },
+        {
+            $project: {
+                _id: 0,
+                date: 0,
+            }
         }])
         console.log(press)
         if(press.length>0) return press
@@ -108,6 +132,12 @@ class PressService {
             },
             {
                 $limit: Number(number)
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: 0,
+                }
             }
         ])
         if(press.length>0) return press
@@ -131,6 +161,12 @@ class PressService {
             },
             {
                 $limit: perLoad
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: 0,
+                }
             }
         ]) : await Press.aggregate([
             {
@@ -146,6 +182,12 @@ class PressService {
             },
             {
                 $limit: perLoad
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: 0,
+                }
             }
         ])
         console.log(press)
