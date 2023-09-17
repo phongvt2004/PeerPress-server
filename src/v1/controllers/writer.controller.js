@@ -18,8 +18,10 @@ class WriterController {
                 password
             })
             if (data?.status === 400) {
+                console.log("err")
                 res.json(data)
             } else {
+                console.log(data)
                 const accessToken = await signAccessToken(data._id.toString())
                 const refreshToken = await signRefreshToken(data._id.toString())
                 console.log({
@@ -36,6 +38,7 @@ class WriterController {
                 })
             }
         } catch (error) {
+            comsole.log('error')
             res.json(error)
         }
     }
