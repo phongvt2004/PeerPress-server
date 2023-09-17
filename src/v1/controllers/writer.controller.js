@@ -38,7 +38,7 @@ class WriterController {
                 })
             }
         } catch (error) {
-            comsole.log('error')
+            console.log('error')
             res.json(error)
         }
     }
