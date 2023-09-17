@@ -1,7 +1,7 @@
 const { createClient } = require('redis');
 const client = createClient({url: process.env.REDIS_URL});
 
-await client.connect()
+client.connect()
 
 client.on('connect', () => {
     console.log('Redis client connected');
