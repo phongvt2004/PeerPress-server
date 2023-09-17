@@ -24,6 +24,7 @@ class WriterService {
                 password: hash
             })
             const result = await User.save()
+            console.log(result)
             return result
         } catch (error) {
             console.log(error)

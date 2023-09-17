@@ -22,6 +22,12 @@ class WriterController {
             } else {
                 const accessToken = await signAccessToken(data._id.toString())
                 const refreshToken = await signRefreshToken(data._id.toString())
+                console.log({
+                    status: 201,
+                    accessToken,
+                    refreshToken,
+                    data
+                })
                 res.json({
                     status: 201,
                     accessToken,
