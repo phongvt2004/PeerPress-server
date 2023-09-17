@@ -9,7 +9,7 @@ class WriterService {
         password
     }) => {
         try {
-            const user = await Writer.find({ username})
+            const user = await Writer.findOne({ username})
             if (user) {
                 return {
                     status: 400,
