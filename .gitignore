@@ -3,4 +3,4 @@ node_modules
 .docker/monitoring/data/*
 push.sh
 data/*
-src/v1/public/uploads
+src/v1/public/uploads/*
