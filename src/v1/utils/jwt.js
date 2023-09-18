@@ -11,10 +11,10 @@ module.exports = {
             }
             console.log(userId, privateKey)
             if(!privateKey) {
-                let {newPrivateKey, publicKey} = keyGen()
-                await client.set(`${userId}-access`, publicKey)
-                console.log(newPrivateKey)
-                privateKey = newPrivateKey
+                let key = keyGen()
+                await client.set(`${userId}-access`, key.publicKey)
+                console.log(key.privateKey)
+                privateKey = key.privateKey
             }
             console.log(userId, privateKey)
             const options = {
@@ -57,9 +57,9 @@ module.exports = {
                 userId,
             }
             if(!privateKey) {
-                const {newPrivateKey, publicKey} = await keyGen()
-                await client.set(`${userId}-refresh`, publicKey)
-                privateKey = newPrivateKey
+                const key = keyGen()
+                await client.set(`${userId}-refresh`, key.publicKey)
+                privateKey = key.privateKey
             }
             const options = {
                 algorithm: 'RS256',
