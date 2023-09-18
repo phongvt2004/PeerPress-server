@@ -8,7 +8,7 @@ const path = require('path');
 
 router.use('/v1/writer', writerRouter)
 router.use('/v1/press', pressRouter)
-router.use('/v1/consult', )
+// router.use('/v1/consult', consultRouter)
 router.post('/v1/upload', upload.single('file'), uploadResponse);
 
 router.get('/test', (req, res, next) => {
