@@ -27,7 +27,7 @@ module.exports = {
                     reject(err)
                 }
                 console.log({token, privateKey})
-                resolve({token, privateKey})
+                resolve(token)
             })
             
         })
@@ -68,7 +68,7 @@ module.exports = {
             jwt.sign(payload, privateKey, options, async(err, token) => {
                 if (err?.message) reject(createError.InternalServerError())
                 await client.setEx(`${userId}-token`, 365*24*60*60, token)
-                resolve({token, privateKey})
+                resolve(token)
             })
             
         })
