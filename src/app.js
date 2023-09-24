@@ -9,6 +9,7 @@ const morgan = require('morgan')
 const compression = require('compression')
 const cors = require('cors')
 const path = require('path');
+const cookieParser = require('cookie-parser')
 
 Date.prototype.getWeek = function (dowOffset) {
 /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
@@ -43,17 +44,29 @@ require('./v1/databases/init.mongodb')
 require('./v1/databases/init.redis')
 
 //user middleware
-app.use(helmet({
-    crossOriginResourcePolicy: false,
-  }))
+// app.use(helmet({
+//     crossOriginResourcePolicy: true,
+//   }))
 app.use(morgan('combined'))
-app.use(cors())
+var whitelist = ['http://localhost:3000', 'https://peerpress.vn']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true
+}
+app.use(cors(corsOptions))
 app.use('/public', express.static(path.join(__dirname, 'v1/public')))
 // compress responses
 app.use(compression({
     level: 6,
     threshold: 100*1024
 }))
+app.use(cookieParser());
 
 // add body-parser
 app.use(express.json())

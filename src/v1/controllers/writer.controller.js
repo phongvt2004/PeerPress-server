@@ -24,15 +24,10 @@ class WriterController {
                 const accessToken = await signAccessToken(data._id.toString())
                 console.log(data)
                 const refreshToken = await signRefreshToken(data._id.toString())
-                console.log({
-                    status: 201,
-                    accessToken,
-                    refreshToken,
-                    data
-                })
+                res.cookie('access-token', accessToken)
+                res.cookie('type', type)
                 res.json({
                     status: 201,
-                    accessToken,
                     refreshToken,
                     data
                 })
@@ -57,9 +52,10 @@ class WriterController {
         } else {
             const accessToken = await signAccessToken(data._id.toString())
             const refreshToken = await signRefreshToken(data._id.toString())
+            res.cookie('access-token', accessToken,  { maxAge: 900000, httpOnly: true })
+            res.cookie('type', data.type)
             res.json({
                 status: 200,
-                accessToken,
                 refreshToken,
                 data
             })

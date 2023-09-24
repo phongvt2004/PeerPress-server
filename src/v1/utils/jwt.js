@@ -4,16 +4,17 @@ const client = require('../databases/init.redis')
 const createError = require('http-errors')
 
 module.exports = {
-    signAccessToken: async (userId, privateKey = null) => {
+    signAccessToken: async (userId, type, privateKey = null, agent) => {
         return new Promise(async (resolve, reject) => {
             const payload = {
                 userId,
+                type
             }
             console.log(userId, privateKey)
             if(!privateKey) {
                 let key = keyGen()
-                await client.set(`${userId}-access`, key.publicKey)
-		console.log(key)
+                await client.set(`${userId}-${agent}-access`, key.publicKey)
+		        console.log(key)
                 privateKey = key.privateKey
             }
             console.log(userId, privateKey)
@@ -27,38 +28,41 @@ module.exports = {
                     reject(err)
                 }
                 console.log({token, privateKey})
+                await client.setEx(`${userId}-${agent}-access-token`, 1*60, token)
                 resolve(token)
             })
             
         })
     }
     ,
-    verifyAccessToken: async(req, res, next) => {
-        if(!req.headers['authorization']) {
-            return next(createError.Unauthorized())
-        }
-        const authHeader = req.headers['authorization']
-        const bearerToken = authHeader.split(' ')
-        const token = bearerToken[1]
-        const userId = req.body.userId || req.query.userId || req.cookies['userId']
-        const key = await client.get(`${userId}-access`)
-        jwt.verify(token, key, (err, payload) => {
-            if(err) {
-                if(err.name === 'JsonWebTokenError') return next(createError.Unauthorized())
-                return next(createError.Unauthorized(err.message)) //jwt expired
-            }
-            req.payload = payload
-            next()
+    verifyAccessToken: async(token, userId, agent) => {
+        return new Promise(async (resolve, reject) => {
+
+            const key = await client.get(`${userId}-${agent}-access`)
+            jwt.verify(token, key, async (err, payload) => {
+                if(err) {
+                    if(err.name === 'JsonWebTokenError') reject(createError.Unauthorized(err))
+                    reject(createError.InternalServerError(err)) //jwt expired
+                }
+                const reply = await client.get(`${userId}-${agent}-access-token`)
+                if(token === reply && reply) resolve({
+                    code: 200,
+                    payload
+                })
+            })
         })
+        
+        
     },
-    signRefreshToken: async (userId, privateKey = null) => {
+    signRefreshToken: async (userId,type, privateKey = null, agent = '') => {
         return new Promise(async (resolve, reject) => {
             const payload = {
                 userId,
+                type
             }
             if(!privateKey) {
                 const key = keyGen()
-                await client.set(`${userId}-refresh`, key.publicKey)
+                await client.set(`${userId}-${agent}-refresh`, key.publicKey)
                 privateKey = key.privateKey
             }
             const options = {
@@ -67,30 +71,29 @@ module.exports = {
             }
             jwt.sign(payload, privateKey, options, async(err, token) => {
                 if (err?.message) reject(createError.InternalServerError())
-                await client.setEx(`${userId}-token`, 365*24*60*60, token)
+                await client.setEx(`${userId}-${agent}-refresh-token`, 365*24*60*60, token)
                 resolve(token)
             })
             
         })
     }
     ,
-    verifyRefreshToken: async (token, userId) => {
+    verifyRefreshToken: async (token, userId, agent) => {
         return new Promise(async (resolve, reject) => {
             
             try {
-                const key = await client.get(`${userId}-refresh`)
+                const key = await client.get(`${userId}-${agent}-refresh`)
                 jwt.verify(token, key, async(err, payload) => {
                     if(err) {
-                        if(err.name === 'JsonWebTokenError') return reject(createError.Unauthorized())
-                        return reject(createError.Unauthorized(err.message))
+                        if(err.name === 'JsonWebTokenError') return reject(createError.Unauthorized(err))
+                        return reject(createError.InternalServerError(err))
                     }
-                    const reply = await client.get(`${userId}-token`)
-                    console.log(reply)
-                    if(token === reply) resolve(payload)
-                    else reject(createError.Unauthorized())
+                    const reply = await client.get(`${userId}-${agent}-refresh-token`)
+                    if(token === reply && reply) resolve(payload)
+                    else reject(createError.Unauthorized("Re login"))
                 })
             } catch (err) {
-                reject(createError.InternalServerError())
+                reject(createError.InternalServerError(err))
             }
         })
     }

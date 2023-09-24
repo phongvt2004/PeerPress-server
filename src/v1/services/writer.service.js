@@ -25,7 +25,7 @@ class WriterService {
             })
             const result = await User.save()
             console.log(result)
-            return result
+            return {username: result.username, type: result.type, _id: result._id}
         } catch (error) {
             console.log(error)
         }
@@ -39,7 +39,7 @@ class WriterService {
         if(writer) {
             const result = await bcrypt.compare(password, writer.password)
             if(result) {
-                return writer
+                return {username: writer.username, type: writer.type, _id: writer._id}
             } else {
                 return createError.Unauthorized("Wrong password")
             }

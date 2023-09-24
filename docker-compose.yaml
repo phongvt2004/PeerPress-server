@@ -33,10 +33,10 @@ services:
       - redis
     links:
       - redis
-  client:
-    build: ../client
-    restart: always
-    ports:
-      - "3000:80"
-    depends_on:
-      - server
+  # client:
+  #   build: ../client
+  #   restart: always
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - server
