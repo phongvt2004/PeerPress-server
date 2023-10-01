@@ -3,9 +3,11 @@ const keyGen = require('./gen_key');
 const client = require('../databases/init.redis')
 const createError = require('http-errors')
 
+
 module.exports = {
-    signAccessToken: async (userId, type, privateKey = null, agent) => {
+    signAccessToken: async (userId, type, agent, privateKey = null) => {
         return new Promise(async (resolve, reject) => {
+            
             const payload = {
                 userId,
                 type
@@ -14,22 +16,27 @@ module.exports = {
             if(!privateKey) {
                 let key = keyGen()
                 await client.set(`${userId}-${agent}-access`, key.publicKey)
-		        console.log(key)
                 privateKey = key.privateKey
             }
-            console.log(userId, privateKey)
             const options = {
                 algorithm: 'RS256',
-                expiresIn: '1m'
+                expiresIn: '6m'
             }
+            console.log(payload)
+            console.log(privateKey)
             jwt.sign(payload, privateKey, options, async(err, token) => {
-                if (err?.message) {
-                    console.log(err)
-                    reject(err)
+                try {
+                    if (err?.message) {
+                        console.log(err)
+                        reject(err)
+                    }
+                    await client.setEx(`${userId}-${agent}-access-token`, 5*60, token)
+                    console.log({token, privateKey})
+                    resolve(token)
+                } catch (e) {
+                    
+                    reject(e)
                 }
-                console.log({token, privateKey})
-                await client.setEx(`${userId}-${agent}-access-token`, 1*60, token)
-                resolve(token)
             })
             
         })
@@ -39,6 +46,7 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
 
             const key = await client.get(`${userId}-${agent}-access`)
+            console.log(key)
             jwt.verify(token, key, async (err, payload) => {
                 if(err) {
                     if(err.name === 'JsonWebTokenError') reject(createError.Unauthorized(err))
@@ -54,7 +62,7 @@ module.exports = {
         
         
     },
-    signRefreshToken: async (userId,type, privateKey = null, agent = '') => {
+    signRefreshToken: async (userId,type, agent = '', privateKey = null) => {
         return new Promise(async (resolve, reject) => {
             const payload = {
                 userId,

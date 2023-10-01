@@ -44,11 +44,11 @@ require('./v1/databases/init.mongodb')
 require('./v1/databases/init.redis')
 
 //user middleware
-// app.use(helmet({
-//     crossOriginResourcePolicy: true,
-//   }))
+app.use(helmet({
+    crossOriginResourcePolicy: true,
+  }))
 app.use(morgan('combined'))
-var whitelist = ['http://localhost:3000', 'https://peerpress.vn']
+var whitelist = ['http://localhost:3000', 'https://peerpress.vn', '-']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

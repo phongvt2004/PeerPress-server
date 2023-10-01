@@ -39,27 +39,37 @@ class WriterController {
     }
 
     async login(req, res, next) {
-        const {
-            username,
-            password,
-        } = req.body
-        const data = await writerService.login({
-            username,
-            password,
-        })
-        if(data?.status === 401) {
-            res.json(data)
-        } else {
-            const accessToken = await signAccessToken(data._id.toString())
-            const refreshToken = await signRefreshToken(data._id.toString())
-            res.cookie('access-token', accessToken,  { maxAge: 900000, httpOnly: true })
-            res.cookie('type', data.type)
-            res.json({
-                status: 200,
-                refreshToken,
-                data
+        try {
+            const {
+                username,
+                password,
+            } = req.body
+            if(!username || !password) {
+                res.json(createError.NotFound())
+                return
+            }
+            const data = await writerService.login({
+                username,
+                password,
             })
+            if(data?.code === 401) {
+                res.json(data)
+            } else {
+                const agent = req.headers['user-agent']
+                const accessToken = await signAccessToken(data._id.toString(), data.type, agent)
+                const refreshToken = await signRefreshToken(data._id.toString(), data.type, agent)
+                res.cookie('access-token', accessToken,  { maxAge: 1*60*1000, httpOnly: true })
+                res.cookie('type', data.type, { maxAge: 1*60*1000, httpOnly: true })
+                res.json({
+                    code: 200,
+                    refreshToken,
+                    data
+                })
+            }
+        } catch (error) {
+            res.json(error)
         }
+        
         
     }
 }

@@ -1,5 +1,5 @@
 const PressService = require('../services/press.service')
-const createError = require('http-errors')
+const createError = require('../utils/create-error')
 
 class PressController {
     async create(req, res, next) {

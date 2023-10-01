@@ -1,6 +1,6 @@
 const Writer = require('../models/writer.model')
 const saltRounds = 10;
-const createError = require('http-errors')
+const createError = require('../utils/create-error')
 const bcrypt = require('bcrypt')
 
 class WriterService {
