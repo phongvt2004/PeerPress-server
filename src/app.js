@@ -52,6 +52,7 @@ app.use(morgan('combined'))
 var whitelist = ['http://localhost:3000', 'https://peerpress.vn/']
 var corsOptions = {
   origin: function (origin, callback) {
+    console.log('origin: ' + origin);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
