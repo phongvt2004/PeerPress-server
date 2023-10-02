@@ -49,7 +49,7 @@ app.use(helmet({
   }))
 // app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan('combined'))
-var whitelist = ['http://localhost:3000', 'https://peerpress.vn']
+var whitelist = ['http://localhost:3000', 'https://peerpress.vn/']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
