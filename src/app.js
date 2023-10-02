@@ -45,8 +45,9 @@ require('./v1/databases/init.redis')
 
 //user middleware
 app.use(helmet({
-    crossOriginResourcePolicy: true,
+    crossOriginResourcePolicy: false,
   }))
+// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan('combined'))
 var whitelist = ['http://localhost:3000', 'https://peerpress.vn']
 var corsOptions = {
@@ -60,7 +61,9 @@ var corsOptions = {
   credentials: true
 }
 app.use('/v1',cors(corsOptions))
+app.use('/public', cors())
 app.use('/public', express.static(path.join(__dirname, 'v1/public')))
+
 // compress responses
 app.use(compression({
     level: 6,
