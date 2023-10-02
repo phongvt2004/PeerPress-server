@@ -48,7 +48,7 @@ app.use(helmet({
     crossOriginResourcePolicy: true,
   }))
 app.use(morgan('combined'))
-var whitelist = ['http://localhost:3000', 'https://peerpress.vn', '-']
+var whitelist = ['http://localhost:3000', 'https://peerpress.vn']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -59,7 +59,7 @@ var corsOptions = {
   },
   credentials: true
 }
-app.use(cors(corsOptions))
+app.use('/v1',cors(corsOptions))
 app.use('/public', express.static(path.join(__dirname, 'v1/public')))
 // compress responses
 app.use(compression({
