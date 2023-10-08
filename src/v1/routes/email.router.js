@@ -4,7 +4,7 @@ const EmailController = require('../controllers/email.controller')
 const {verifyToken} = require('../middlewares/jwt.middleware')
 
 
-router.post('/add', EmailController.create)
+router.post('/add', EmailController.add)
 
 router.get('/test', (req, res) => {
     res.json("data")
