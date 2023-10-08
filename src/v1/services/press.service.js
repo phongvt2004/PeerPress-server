@@ -1,5 +1,5 @@
 const Press = require('../models/press.model')
-const createError = require('http-errors')
+const createError = require('../utils/create-error')
 
 class PressService {
     static create = async(data) => {

@@ -9,10 +9,10 @@ const client = require('../databases/init.redis')
 
 const checkBlackList = async(req, res, next) => {
     try {
-        // const result = await client.SISMEMBER('token:backlist', req.body['refresh-token'])
+        const result = await client.SISMEMBER('token:backlist', req.body['refresh-token'])
         const userId = req.body.userId || req.query.userId || req.cookies['userId']
         const agent = req.headers['user-agent']
-        const result = false
+        // const result = false
         console.log("result", result)
         if(result) {
             const payload = await verifyRefreshToken(req.body['refresh-token'], userId,agent)
