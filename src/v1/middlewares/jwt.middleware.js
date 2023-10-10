@@ -39,6 +39,7 @@ const createNewToken = async(req, res, next) => {
         const type = payload.type
         const newAccessToken = await signAccessToken(userId, type, agent)
         res.cookie('access-token', newAccessToken, { maxAge: 5*60*1000, httpOnly: true })
+        res.cookie('userId', userId, { httpOnly: true })
         console.log('success', newAccessToken)
         res.json({
             code: 200,
@@ -62,6 +63,7 @@ const verifyToken = async (req, res, next) => {
         console.log(token, userId, agent)
         const payload = await verifyAccessToken(token, userId, agent)
         if (payload?.code === 200) {
+            req.userId = userId
             req.role = payload.type
             next()
         } else {

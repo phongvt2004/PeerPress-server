@@ -1,5 +1,11 @@
 const PressService = require('../services/press.service')
 const createError = require('../utils/create-error')
+const TOKEN = process.env.SECRET_TOKEN || "PeerPressToken"
+
+const published = 0;
+const draft = 1;
+const pending = 2;
+const deleted = 3;
 
 class PressController {
     async create(req, res, next) {
@@ -25,8 +31,10 @@ class PressController {
                 thumbnail,
                 content,
                 date: date,
-                views :0, 
-                writer: writer? writer:'admin'
+                views :0,
+                state : pending,
+                userId: req.userId,
+                writer: writer? writer:'admin',
             })
 
             res.json(data)
@@ -80,11 +88,11 @@ class PressController {
 
     async updateData(req, res, next) {
         try {
-            if(req.body?.token === "This is update token") {
+            if(req.body?.token === TOKEN) {
                 const data = await PressService.updateData()
                 res.json(data)
             } else {
-                res.json(createError.Forbidden("Wrong token"))
+                res.json(createError.Forbidden())
             }
         } catch (error) {
             res.json(createError.InternalServerError(error))

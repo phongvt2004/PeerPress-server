@@ -1,8 +1,12 @@
+
 const writerService = require('../services/writer.service')
+const createError = require('../utils/create-error')
+
 const {
     signAccessToken,
     signRefreshToken,
 } = require('../utils/jwt')
+const TOKEN = process.env.SECRET_TOKEN || "PeerPressToken"
 
 class WriterController {
     async create(req, res, next) {
@@ -10,8 +14,13 @@ class WriterController {
             const{
                 username,
                 type,
-                password
+                password,
+                token
             } = req.body
+            if(token !== TOKEN) {
+                res.json(createError.Forbidden())
+                return
+            }
             const data = await writerService.create({
                 username,
                 type,
@@ -25,9 +34,9 @@ class WriterController {
                 console.log(data)
                 const refreshToken = await signRefreshToken(data._id.toString())
                 res.cookie('access-token', accessToken)
-                res.cookie('type', type)
+                res.cookie('userId', data._id.toString())
                 res.json({
-                    status: 201,
+                    status: 200,
                     refreshToken,
                     data
                 })
@@ -59,7 +68,7 @@ class WriterController {
                 const accessToken = await signAccessToken(data._id.toString(), data.type, agent)
                 const refreshToken = await signRefreshToken(data._id.toString(), data.type, agent)
                 res.cookie('access-token', accessToken,  { maxAge: 1*60*1000, httpOnly: true })
-                res.cookie('type', data.type, { maxAge: 1*60*1000, httpOnly: true })
+                res.cookie('userId', data._id, { httpOnly: true })
                 res.json({
                     code: 200,
                     refreshToken,

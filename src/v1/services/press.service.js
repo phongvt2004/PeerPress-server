@@ -1,5 +1,9 @@
 const Press = require('../models/press.model')
 const createError = require('../utils/create-error')
+const published = 0;
+const draft = 1;
+const pending = 2;
+const deleted = 3;
 
 class PressService {
     static create = async(data) => {
@@ -35,13 +39,8 @@ class PressService {
     static updateData = async () => {
         const presses = await Press.find()
         for(let press of presses) {
-            press.views = 0;
-            let date = new Date(press.createdAt);
-            press.date = {
-                week: date.getWeek(),
-                month: date.getMonth() + 1,
-                year: date.getFullYear()
-            }
+            press.state = pending
+            press.userId = "6507da0e240b942c49543bce"
             await Press.updateOne({_id: press._id}, press)
         }
         return "ok"

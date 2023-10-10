@@ -7,6 +7,8 @@ const Press = new Schema({
     content: {type: String, required: true},
     writer: {type: String, required: true},
     views: {type: Number, required: true},
+    userId: {type: String, required: true},
+    state: {type: Number, required: true},
     date: {
         week: {type: Number, required: true},
         month: {type: Number, required: true},
