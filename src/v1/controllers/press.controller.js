@@ -68,7 +68,7 @@ class PressController {
             } = req.query
 
             const data = await PressService.getByState({
-                state,
+                state: Number.parseInt(state),
                 load,
                 perLoad
             })
