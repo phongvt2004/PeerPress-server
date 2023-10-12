@@ -52,7 +52,8 @@ app.use(morgan('combined'))
 var whitelist = ['http://localhost:3000', 'https://peerpress.vn/']
 var corsOptions = {
   origin: ['http://localhost:3000', 'https://peerpress.vn/'],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'HEAD', 'OPTIONS', 'POST', 'PUT', 'DELETE', 'PATCH']
 }
 app.use('/v1',cors(corsOptions))
 app.use('/public', cors())
