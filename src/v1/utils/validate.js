@@ -7,6 +7,9 @@ const authVal = Joi.object({
     phoneNumber: Joi.string().length(10).pattern(/^[0-9]+$/, 'numbers').required(),
 })
 
+const emailVal = Joi.string().email().required()
+
 module.exports = {
-    authVal
+    authVal,
+    emailVal,
 }

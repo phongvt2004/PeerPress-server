@@ -1,9 +1,8 @@
 const Press = require('../models/press.model')
 const createError = require('../utils/create-error')
 const published = 0;
-const draft = 1;
-const pending = 2;
-const deleted = 3;
+const pending = 1;
+const deleted = 2;
 
 class PressService {
     static create = async(data) => {
@@ -20,6 +19,39 @@ class PressService {
         pressId
     }) => {
         const press = await Press.findById(pressId)
+        if(press) {
+            return press
+        } else {
+            return createError.NotFound("Press not found")
+        }
+    }
+
+    static getByState = async({
+        state,
+        load,
+        perLoad
+    }) => {
+        const presses = await Press.aggregate([{
+            $match: {state: state},
+        },
+        {
+            $skip: perLoad*load-perLoad
+        },
+        {
+            $limit: perLoad
+        }])
+        const length = await Press.countDocuments({ state: state})
+        if(presses.length > 0) {
+            return {presses, length}
+        } else {
+            return createError.NotFound("Press not found")
+        }
+    }
+
+    static publishPress = async({pressId}) => {
+        const press = await Press.findOneAndUpdate({_id: pressId}, {state: published}, {
+            new: true,
+        })
         if(press) {
             return press
         } else {
@@ -194,7 +226,16 @@ class PressService {
         else return createError.NotFound("Not found any press")
     }
 
-    async deletePress({pressId}) {
+    static deletePress = async({pressId}) => {
+        let press = await Press.findByIdAndUpdate({_id: pressId}, {
+            state: deleted
+        }, {
+            new: true
+        })
+        return press
+    }
+
+    static deleteForerver = async({pressId}) => {
         let press = await Press.deleteOne({_id: pressId})
         return press
     }

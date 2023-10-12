@@ -7,6 +7,7 @@ class EmailController {
             let {
                 address
             } = req.body
+            
             const data = await EmailService.add({
                 address
             })

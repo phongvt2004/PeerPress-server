@@ -1,4 +1,4 @@
-const {authVal} = require('../utils/validate')
+const {authVal, emailVal} = require('../utils/validate')
 
 async function authValidate(req, res, next) {
     try {
@@ -12,6 +12,19 @@ async function authValidate(req, res, next) {
     }
 }
 
+async function EmailValidate(req, res, next) {
+    try {
+        await emailVal.validateAsync(req.body?.address)
+        next()
+    } catch (err) {
+        res.json({
+            code: 400,
+            error: err
+        })
+    }
+}
+
 module.exports = {
-    authValidate
+    authValidate,
+    EmailValidate
 }

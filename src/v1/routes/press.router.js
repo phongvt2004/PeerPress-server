@@ -14,6 +14,7 @@ router.get('/get/newpost', PressController.getNewPost)
 router.get('/get/popular', PressController.getPopularPost)
 router.get('/search', PressController.searchPress)
 router.delete('/delete', verifyToken, PressController.deletePress)
+router.delete('/deleteForever', verifyToken, PressController.deletePress)
 
 router.get('/test', (req, res) => {
     res.json("data")

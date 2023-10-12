@@ -3,9 +3,8 @@ const createError = require('../utils/create-error')
 const TOKEN = process.env.SECRET_TOKEN || "PeerPressToken"
 
 const published = 0;
-const draft = 1;
-const pending = 2;
-const deleted = 3;
+const pending = 1;
+const deleted = 2;
 
 class PressController {
     async create(req, res, next) {
@@ -60,6 +59,27 @@ class PressController {
         
     }
 
+    async getByState(req, res, next) {
+        try {      
+            const {
+                state,
+                load,
+                perLoad
+            } = req.query
+
+            const data = await PressService.getByState({
+                state,
+                load,
+                perLoad
+            })
+
+            res.json(data)
+        } catch (error) {
+            next(createError.InternalServerError(error))
+        }
+        
+    }
+
     async update(req, res, next) {
         try {
             const{
@@ -83,6 +103,24 @@ class PressController {
             res.json(data)
         } catch (error) {
             next(createError.InternalServerError(error))
+        }
+    }
+
+    async publishPress(req, res, next) {
+        try {
+            if(req.role === 'admin') {
+                const{
+                    pressId
+                } = req.body
+                const data = await PressService.publishPress({
+                    pressId
+                })
+                res.json(data)
+            } else {
+                res.json(createError.Forbidden())
+            }
+        } catch (error) {
+            res.json(createError.InternalServerError(error))
         }
     }
 
@@ -202,6 +240,18 @@ class PressController {
                 pressId
             } = req.query
             const data = await PressService.deletePress({pressId})
+            res.json(data)
+        } catch (error) {
+            res.json(createError.InternalServerError(error))
+        }
+    }
+
+    async deleteForever(req, res, next) {
+        try {
+            const {
+                pressId
+            } = req.query
+            const data = await PressService.deleteForerver({pressId})
             res.json(data)
         } catch (error) {
             res.json(createError.InternalServerError(error))
