@@ -35,10 +35,10 @@ class PressService {
             $match: {state: state},
         },
         {
-            $skip: perLoad*load-perLoad
+            $skip: Number.parseInt(perLoad*load-perLoad)
         },
         {
-            $limit: perLoad
+            $limit: Number.parseInt(perLoad)
         }])
         const length = await Press.countDocuments({ state: state})
         if(presses.length > 0) {
@@ -86,7 +86,7 @@ class PressService {
             $sort: {_id: -1}
         },
         {
-            $limit: number
+            $limit: Number.parseInt(number)
         },
         {
             $project: {
@@ -107,10 +107,10 @@ class PressService {
             $sort: {_id: -1}
         },
         {
-            $skip: perLoad*load-perLoad
+            $skip: Number.parseInt(perLoad*load-perLoad)
         },
         {
-            $limit: perLoad
+            $limit: Number.parseInt(perLoad)
         },
         {
             $project: {
@@ -143,7 +143,7 @@ class PressService {
             $sort: {_id: -1}
         },
         {
-            $limit: Number(number)
+            $limit: Number.parseInt(number)
         },
         {
             $project: {
@@ -162,7 +162,7 @@ class PressService {
                 $sort: {views: -1}
             },
             {
-                $limit: Number(number)
+                $limit: Number.parseInt(number)
             },
             {
                 $project: {
@@ -188,10 +188,10 @@ class PressService {
                 $sort: {_id: -1}
             },
             {
-                $skip: perLoad*load-perLoad
+                $skip: Number.parseInt(perLoad*load-perLoad)
             },
             {
-                $limit: perLoad
+                $limit: Number.parseInt(perLoad)
             },
             {
                 $project: {
@@ -209,10 +209,10 @@ class PressService {
                 $sort: {_id: -1}
             },
             {
-                $skip: perLoad*load-perLoad
+                $skip: Number.parseInt(perLoad*load-perLoad)
             },
             {
-                $limit: perLoad
+                $limit: Number.parseInt(perLoad)
             },
             {
                 $project: {
