@@ -70,8 +70,10 @@ class PressService {
 
     static updateData = async () => {
         const presses = await Press.find()
+        let i = 0
         for(let press of presses) {
-            press.state = pending
+            press.state = i % 3 === 0 ? pending : published
+            i++
             press.userId = "6507da0e240b942c49543bce"
             await Press.updateOne({_id: press._id}, press)
         }
