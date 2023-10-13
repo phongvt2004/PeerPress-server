@@ -29,10 +29,10 @@ class ConsultService {
             $sort: {_id: -1}
         },
         {
-            $skip: perLoad*load-perLoad
+            $limit: Number.parseInt(perLoad*load) + Number.parseInt(perLoad)
         },
         {
-            $limit: perLoad
+            $skip: Number.parseInt(perLoad*load)
         },
         ])
         if(consult.length>0) return consult
