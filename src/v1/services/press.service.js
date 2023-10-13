@@ -35,10 +35,10 @@ class PressService {
             $match: {state: state},
         },
         {
-            $limit: Number.parseInt(perLoad*load) + Number.parseInt(perLoad)
+            $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
         },
         {
-            $skip: Number.parseInt(perLoad*load)
+            $skip: Number.parseInt(perLoad*(load-1))
         },])
         const length = await Press.countDocuments({ state: state})
         if(presses.length > 0) {
@@ -109,10 +109,10 @@ class PressService {
             $sort: {_id: -1}
         },
         {
-            $limit: Number.parseInt(perLoad*load) + Number.parseInt(perLoad)
+            $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
         },
         {
-            $skip: Number.parseInt(perLoad*load)
+            $skip: Number.parseInt(perLoad*(load-1))
         },
         {
             $project: {
@@ -190,10 +190,10 @@ class PressService {
                 $sort: {_id: -1}
             },
             {
-                $limit: Number.parseInt(perLoad*load) + Number.parseInt(perLoad)
+                $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
             },
             {
-                $skip: Number.parseInt(perLoad*load)
+                $skip: Number.parseInt(perLoad*(load-1))
             },
             {
                 $project: {
@@ -211,10 +211,10 @@ class PressService {
                 $sort: {_id: -1}
             },
             {
-                $limit: Number.parseInt(perLoad*load) + Number.parseInt(perLoad)
+                $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
             },
             {
-                $skip: Number.parseInt(perLoad*load)
+                $skip: Number.parseInt(perLoad*(load-1))
             },
             {
                 $project: {
