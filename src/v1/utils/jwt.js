@@ -91,6 +91,7 @@ module.exports = {
             
             try {
                 const key = await client.get(`${userId}-${agent}-refresh`)
+                console.log(`refresh token`, key)
                 jwt.verify(token, key, async(err, payload) => {
                     if(err) {
                         if(err.name === 'JsonWebTokenError') return reject(createError.Unauthorized(err))
