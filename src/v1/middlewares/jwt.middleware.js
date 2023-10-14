@@ -60,9 +60,9 @@ const verifyToken = async (req, res, next) => {
         }
         const userId = req.body.userId || req.query.userId || req.cookies['userId']
         const agent = req.headers['user-agent']
-        // console.log(req)
         console.log(token, userId, agent)
         const payload = await verifyAccessToken(token, userId, agent)
+        console.log(payload)
         if (payload?.code === 200) {
             req.userId = userId
             req.role = payload.type
