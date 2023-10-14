@@ -32,7 +32,9 @@ class PressService {
         perLoad
     }) => {
         const presses = await Press.aggregate([{
-            $match: {state: state},
+            $match: {
+                state: state
+            },
         },
         {
             $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
@@ -82,7 +84,10 @@ class PressService {
 
     static getByTypeNumber = async({type, number}) => {
         const press = await Press.aggregate([{
-            $match: {type: type},
+            $match: {
+                state: published,
+                type: type,
+            },
         },
         {
             $sort: {_id: -1}
@@ -103,7 +108,10 @@ class PressService {
     static getByType = async({type, load}) => {
         const perLoad = 5
         const press = await Press.aggregate([{
-            $match: {type: type},
+            $match: {
+                state: published,
+                type: type
+            },
         },
         {
             $sort: {_id: -1}
@@ -125,7 +133,7 @@ class PressService {
     }
 
     static getBySlug = async({slug}) => {
-        const press = await Press.findOne({slug})
+        const press = await Press.findOne({slug, state: published})
         press.views++
         await Press.updateOne({_id: press._id}, press)
         if(press) return {
@@ -141,6 +149,11 @@ class PressService {
     static getNewPost = async({number}) => {
         console.log("-------------")
         const press = await Press.aggregate([
+        {
+            $match: {
+                state: published,
+            }
+        },
         {
             $sort: {_id: -1}
         },
@@ -160,6 +173,11 @@ class PressService {
 
     static getPopularPost = async({number}) => {
         const press = await Press.aggregate([
+            {
+                $match: {
+                    state: published,
+                }
+            },
             {
                 $sort: {views: -1}
             },
@@ -182,6 +200,7 @@ class PressService {
         const press =type ? await Press.aggregate([
             {
                 $match: {
+                    state: published,
                     type: type,
                     heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')}
                 }
@@ -204,6 +223,7 @@ class PressService {
         ]) : await Press.aggregate([
             {
                 $match: {
+                    state: published,
                     heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')}
                 }
             },
