@@ -195,37 +195,24 @@ class PressService {
         else return createError.NotFound("Not found any press")
     }
 
-    static searchPress = async({keyword, type, load}) => {
-        const perLoad = 10
-        const press =type ? await Press.aggregate([
+    static searchPress = async({keyword, type, load, perLoad, date}) => {
+
+        let match = {
+            state: published,
+            heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')}
+        }
+
+        if(type) match.type = type.toUpperCase()
+        if(date) {
+            const now = new Date()
+            if(date === 0) match.date = now.getWeek()-1
+            else if(date === 1) match.date = now.getMonth()-1
+            if(date === 2) match.date = now.getFullYear()-1
+        }
+
+        const press = await Press.aggregate([
             {
-                $match: {
-                    state: published,
-                    type: type,
-                    heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')}
-                }
-            },
-            {
-                $sort: {_id: -1}
-            },
-            {
-                $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
-            },
-            {
-                $skip: Number.parseInt(perLoad*(load-1))
-            },
-            {
-                $project: {
-                    _id: 0,
-                    date: 0,
-                }
-            }
-        ]) : await Press.aggregate([
-            {
-                $match: {
-                    state: published,
-                    heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')}
-                }
+                $match: match
             },
             {
                 $sort: {_id: -1}

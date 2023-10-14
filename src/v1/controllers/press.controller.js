@@ -91,13 +91,20 @@ class PressController {
                 slug
             } = req.body
 
+            let date = {
+                week: today.getWeek(),
+                month : today.getMonth(),
+                year : today.getFullYear()
+            }
+
             const data = await PressService.update({
                 writerheading,
                 type,
                 preview,
                 content,
                 writer,
-                slug
+                slug,
+                date
             })
 
             res.json(data)
@@ -219,12 +226,16 @@ class PressController {
             const {
                 keyword,
                 type,
-                load
+                load,
+                perLoad,
+                date
             } = req.query
             const data = await PressService.searchPress({
                 keyword,
-                type,
-                load
+                type: type.toUpperCase(),
+                load,
+                perLoad,
+                date
             })
 
             res.json(data)
