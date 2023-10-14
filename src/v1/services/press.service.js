@@ -210,7 +210,6 @@ class PressService {
             if(date === 0) match.date.week = now.getWeek()-1
             else if(date === 1) match.date.month = now.getMonth()-1
             else if(date === 2) match.date.year = now.getFullYear()-1
-            delete match.data.test
         } else delete match.date
 
         const press = await Press.aggregate([
