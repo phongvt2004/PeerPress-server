@@ -199,19 +199,19 @@ class PressService {
 
         let match = {
             state: published,
-            heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')}
+            heading: {$regex: new RegExp(`.*${keyword}.*`,'igm')},
+            date: {}
         }
 
         if(type) match.type = type.toUpperCase()
         if(date) {
             date = Number.parseInt(date)
             const now = new Date()
-            match.date = {test: 1}
             if(date === 0) match.date.week = now.getWeek()-1
             else if(date === 1) match.date.month = now.getMonth()-1
             else if(date === 2) match.date.year = now.getFullYear()-1
             delete match.data.test
-        }
+        } else delete match.date
 
         const press = await Press.aggregate([
             {
