@@ -204,6 +204,7 @@ class PressService {
 
         if(type) match.type = type.toUpperCase()
         if(date) {
+            date = Number.parseInt(date)
             const now = new Date()
             if(date === 0) match.date = now.getWeek()-1
             else if(date === 1) match.date = now.getMonth()-1
