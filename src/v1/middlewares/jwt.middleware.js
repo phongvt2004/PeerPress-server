@@ -65,7 +65,7 @@ const verifyToken = async (req, res, next) => {
         console.log(payload)
         if (payload?.code === 200) {
             req.userId = userId
-            req.role = payload.type
+            req.role = payload.payload.type
             next()
         } else {
             res.json(createError.Unauthorized(payload))
