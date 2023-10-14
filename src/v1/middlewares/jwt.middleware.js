@@ -35,7 +35,6 @@ const createNewToken = async(req, res, next) => {
         const userId = req.body.userId || req.query.userId || req.cookies['userId']
         const agent = req.headers['user-agent']
         const token = req.body['refresh-token']
-        console.log(token, userId, agent)
         const payload = await verifyRefreshToken(req.body['refresh-token'], userId, agent)
         // await client.SADD('token:backlist', req.body['refresh-token'])
         const type = payload.type
