@@ -6,6 +6,7 @@ const {verifyToken} = require('../middlewares/jwt.middleware')
 
 router.post('/create', verifyToken, PressController.create)
 router.put('/update/data', PressController.updateData)
+router.put('/publish', verifyToken, PressController.publishPress)
 router.put('/update', verifyToken,PressController.update)
 router.get('/get/id', PressController.get)
 router.get('/get/state', PressController.getByState)

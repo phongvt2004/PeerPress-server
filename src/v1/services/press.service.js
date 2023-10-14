@@ -206,6 +206,7 @@ class PressService {
         if(date) {
             date = Number.parseInt(date)
             const now = new Date()
+            match.date = {}
             if(date === 0) match.date.week = now.getWeek()-1
             else if(date === 1) match.date.month = now.getMonth()-1
             if(date === 2) match.date.year = now.getFullYear()-1
