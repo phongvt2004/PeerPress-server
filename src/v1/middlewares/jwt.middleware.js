@@ -40,8 +40,8 @@ const createNewToken = async(req, res, next) => {
         // await client.SADD('token:backlist', req.body['refresh-token'])
         const type = payload.type
         const newAccessToken = await signAccessToken(userId, type, agent)
-        res.cookie('access-token', newAccessToken, { maxAge: 5*60*1000,})
-        res.cookie('userId', userId)
+        res.cookie('access-token', newAccessToken, { maxAge: 5*60*1000, httpOnly: true, sameSite: 'None', secure: true})
+        res.cookie('userId', userId, {httpOnly: true, sameSite: 'None', secure: true})
         console.log('success', newAccessToken)
         res.json({
             code: 200,

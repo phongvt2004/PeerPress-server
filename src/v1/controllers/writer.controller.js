@@ -67,8 +67,8 @@ class WriterController {
                 const agent = req.headers['user-agent']
                 const accessToken = await signAccessToken(data._id.toString(), data.type, agent)
                 const refreshToken = await signRefreshToken(data._id.toString(), data.type, agent)
-                res.cookie('access-token', accessToken,  { maxAge: 5*60*1000})
-                res.cookie('userId', data._id)
+                res.cookie('access-token', accessToken,  { maxAge: 5*60*1000, httpOnly: true, sameSite: 'strict', secure: true})
+                res.cookie('userId', data._id, {httpOnly: true, sameSite: 'strict', secure: true})
                 res.json({
                     code: 200,
                     refreshToken,
