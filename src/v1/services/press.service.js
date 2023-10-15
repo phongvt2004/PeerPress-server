@@ -104,7 +104,7 @@ class PressService {
             },
         },
         {
-            $sort: {_id: -1}
+            $sort: {updatedAt: -1}
         },
         {
             $limit: Number.parseInt(number)
@@ -128,7 +128,7 @@ class PressService {
             },
         },
         {
-            $sort: {_id: -1}
+            $sort: {updatedAt: -1}
         },
         {
             $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
@@ -169,7 +169,7 @@ class PressService {
             }
         },
         {
-            $sort: {_id: -1}
+            $sort: {updatedAt: -1}
         },
         {
             $limit: Number.parseInt(number)
@@ -230,7 +230,7 @@ class PressService {
                 $match: match
             },
             {
-                $sort: {_id: -1}
+                $sort: {updatedAt: -1}
             },
             {
                 $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
