@@ -37,6 +37,9 @@ class PressService {
             },
         },
         {
+            $sort: {updatedAt: -1}
+        },
+        {
             $limit: Number.parseInt(perLoad*(load-1)) + Number.parseInt(perLoad)
         },
         {
@@ -51,6 +54,17 @@ class PressService {
     }
 
     static publishPress = async({pressId}) => {
+        const press = await Press.findOneAndUpdate({_id: pressId}, {state: published}, {
+            new: true,
+        })
+        if(press) {
+            return press
+        } else {
+            return createError.NotFound("Press not found")
+        }
+    }
+
+    static restorePress = async({pressId}) => {
         const press = await Press.findOneAndUpdate({_id: pressId}, {state: published}, {
             new: true,
         })

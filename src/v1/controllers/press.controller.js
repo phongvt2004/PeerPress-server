@@ -131,6 +131,24 @@ class PressController {
         }
     }
 
+    async restorePress(req, res, next) {
+        try {
+            if(req.role === 'admin') {
+                const{
+                    pressId
+                } = req.body
+                const data = await PressService.restorePress({
+                    pressId
+                })
+                res.json(data)
+            } else {
+                res.json(createError.Forbidden())
+            }
+        } catch (error) {
+            res.json(createError.InternalServerError(error))
+        }
+    }
+
     async updateData(req, res, next) {
         try {
             if(req.body?.token === TOKEN) {
